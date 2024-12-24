@@ -1,0 +1,8 @@
+_base.hxml
+-D windowSize=800x600
+-D windowTitle=Breaking Bass
+-D windowFixed=1
+-hl bin/client.hl
+-lib hlsdl
+-lib hlopenal
+-lib random

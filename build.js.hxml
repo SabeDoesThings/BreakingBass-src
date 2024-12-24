@@ -1,0 +1,3 @@
+_base.hxml
+-lib random
+-js bin/client.js
