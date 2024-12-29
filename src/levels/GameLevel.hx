@@ -1,5 +1,6 @@
 package levels;
 
+import hxd.Timer;
 import h2d.Text;
 import ent.MaxSeaweed;
 import ent.ExtraTime;
@@ -69,9 +70,9 @@ class GameLevel extends Level {
         highscoreText.textAlign = Center;
         this.addChild(highscoreText);
 
-        GameState.score = 0;
-        GameState.timer = 31;
-        GameState.highscore = 0;
+        Globals.score = 0;
+        Globals.timer = 31;
+        Globals.highscore = 0;
 
         camera.x = player.x / 2;
         camera.y = player.y / 1.5;
@@ -80,9 +81,9 @@ class GameLevel extends Level {
     public override function update(dt: Float) {
         player.update(dt);
 
-        GameState.timer -= dt;
-        if (GameState.timer <= 0) {
-            GameState.timer = 0;
+        Globals.timer -= dt;
+        if (Globals.timer <= 0) {
+            Globals.timer = 0;
             this.dispose();
             Game.inst.setLevel(new ResultMenu());
             Res.gameplaymusic.dispose();
@@ -141,20 +142,20 @@ class GameLevel extends Level {
         }
 
         for (seaweed in seaweeds) {
-            if (this.player.bounds.intersects(seaweed.bounds) && seaweed.collected == false && GameState.score < 50) {
+            if (this.player.bounds.intersects(seaweed.bounds) && seaweed.collected == false && Globals.score < 50) {
                 seaweed.collected = true;
                 seaweed.remove();
-                GameState.score += 10;
+                Globals.score += 10;
                 Res.seaweedPickup.play();
             }
         }
 
         for (maxSeaweed in maxSeaweeds) {
-            if (this.player.bounds.intersects(maxSeaweed.bounds) && maxSeaweed.collected == false && GameState.score < 50) {
+            if (this.player.bounds.intersects(maxSeaweed.bounds) && maxSeaweed.collected == false && Globals.score < 50) {
                 maxSeaweed.collected = true;
                 maxSeaweed.remove();
-                if (GameState.score < 50) {
-                    GameState.score == 50;
+                if (Globals.score < 50) {
+                    Globals.score == 50;
                     Res.maxSeaweed.play();
                 }
             }
@@ -164,16 +165,16 @@ class GameLevel extends Level {
             if (this.player.bounds.intersects(extraTime.bounds) && extraTime.collected == false) {
                 extraTime.collected = true;
                 extraTime.remove();
-                if (GameState.timer < 20) {
-                    GameState.timer += 10;
+                if (Globals.timer < 20) {
+                    Globals.timer += 10;
                     Res.extraTimePickup.play();
                 }
             }
         }
 
-        if (player.y <= 30 && GameState.score == 50) {
-            GameState.highscore += 50;
-            GameState.score = 0;
+        if (player.y <= 30 && Globals.score == 50) {
+            Globals.highscore += 50;
+            Globals.score = 0;
             Res.highscore.play();
         }
 
@@ -193,8 +194,8 @@ class GameLevel extends Level {
         highscoreText.x = Window.getInstance().width / 4 + camera.x; // Adjust position based on zoom
         highscoreText.y = camera.y; // Adjust position based on zoom
 
-        scoreText.text = "Score: " + GameState.score;
-        timerText.text = "Time: " + Math.floor(GameState.timer);
-        highscoreText.text = "Highscore: " + GameState.highscore;
+        scoreText.text = "Score: " + Globals.score;
+        timerText.text = "Time: " + Math.floor(Globals.timer);
+        highscoreText.text = "Highscore: " + Globals.highscore;
     }
 }

@@ -24,7 +24,7 @@ class ResultMenu extends Level {
         this.addChild(tf);
 
         var scoreText = new h2d.Text(font);
-        scoreText.text = "Highscore: " + GameState.highscore;
+        scoreText.text = "Highscore: " + Globals.highscore;
         scoreText.scale(2);
         scoreText.x = Window.getInstance().width / 2.5;
         scoreText.y = Window.getInstance().height / 5;

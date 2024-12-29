@@ -7,7 +7,8 @@ import h2d.Scene;
 import h2d.Bitmap;
 
 class Shark extends Bitmap {
-    var speed: Int;
+    public var speed: Float;
+
     var directionX: Int;
     
     public var bounds: Bounds;
@@ -18,7 +19,7 @@ class Shark extends Bitmap {
         this.x = x;
         this.y = y;
         this.tile = Res.Shark.toTile();
-        this.speed = 50;
+        this.speed = 200;
         this.directionX = dirX;
 
         this.scaleX = dirX == -1 ? -1 : 1;
